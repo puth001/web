@@ -1,0 +1,212 @@
+/* ฟอนต์ และพื้นฐาน */
+:root{
+  --bg: #ffffff;
+  --brand: #0c4a6e;         /* ฟ้าเข้ม */
+  --brand-2: #1e749b;       /* ไล่เฉด */
+  --text: #0f172a;          /* เทาเข้ม */
+  --muted: #6b7280;         /* เทากลาง */
+  --hover: #eef6fb;         /* พื้น hover */
+  --focus: #93c5fd;         /* เส้นโฟกัสเพื่อ a11y */
+  --shadow: 0 4px 18px rgba(0,0,0,.08);
+  --radius: 10px;
+  --gap: .9rem;
+}
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family: "Noto Sans Thai", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  color:var(--text);
+  background:linear-gradient(90deg,#e8f5fb, #f6fbff);
+  min-height:100vh;
+}
+
+/* ส่วนหัว */
+header, footer {
+  background-color: var(--brand);
+  color: white;
+  text-align: center;
+}
+
+/* คอนเทนเนอร์ */
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ---------- NAVBAR WRAPPER ---------- */
+.site-header{
+  position: sticky; top:0; z-index: 1000;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+.navbar{
+  max-width:1180px; margin:auto;
+  display:flex; align-items:center; justify-content:space-between;
+  padding: .6rem 1rem;
+  gap: 1rem;
+}
+
+/* ---------- Logo + home ---------- */
+.brand{
+  display:flex; align-items:center; gap:.6rem; min-width: 200px;
+}
+.home-link{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:40px;height:40px;border-radius:50%;
+  border:1px solid #e5e7eb;background:#fff;
+  text-decoration:none;
+}
+.home-link svg{width:22px;height:22px;fill:var(--brand)}
+.brand-text{font-weight:700; color:var(--brand)}
+.brand-sub{font-size:.78rem; color:var(--muted); margin-top:-2px}
+
+
+nav.primary{
+  flex: 1 1 auto;
+}
+.menu{
+  display:flex; align-items:center; justify-content:flex-start;
+  gap: var(--gap); margin:0; padding:0; list-style:none;
+}
+.menu > li{
+  position:relative;
+}
+.menu > li > a, .menu > li > button{
+  display:flex; align-items:center; gap:.35rem;
+  padding:.65rem .8rem; border-radius:8px;
+  font-size:.98rem; text-decoration:none; color:var(--text);
+  background:transparent; border:0; cursor:pointer;
+}
+.menu > li > a:hover,
+.menu > li > button:hover{
+  background: var(--hover);
+}
+.menu .caret{font-size:.85em; color:var(--muted)}
+.menu > li.active > a{ /* หน้าที่ใช้งานอยู่ */
+  color:var(--brand);
+  background:linear-gradient(90deg,#eaf6ff,#f7fbff);
+  outline:1px solid #e3f0fb;
+}
+
+/* ---------- Dropdown ---------- */
+.dropdown{
+  position:absolute; left:0; top: 100%;
+  min-width: 280px; padding:.4rem;
+  background:#fff; border:1px solid #e5e7eb; border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display:none;
+}
+.dropdown a{
+  display:flex; align-items:center; gap:.6rem;
+  padding:.6rem .7rem; border-radius:8px; text-decoration:none; color:var(--text);
+  font-size:.95rem;
+}
+.dropdown a:hover{ background: var(--hover); }
+/* โชว์ dropdown เมื่อ เมาส์ไปชี้   */
+.menu > li:focus-within .dropdown,
+.menu > li:hover .dropdown{ display:block; }
+
+/* ---------- Utilities ---------- */
+.badge{
+  padding:.1rem .45rem; border-radius:999px;
+  background:linear-gradient(90deg,var(--brand),var(--brand-2)); color:#fff;
+  font-size:.72rem; font-weight:600;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 980px){
+  .hamburger{display:inline-flex}
+  nav.primary{position:relative; flex: 0 0 100%}
+  .menu{
+    position:absolute; left:0; right:0; top: calc(100% + .5rem);
+    background:#fff; border:1px solid #e5e7eb; border-radius:12px;
+    padding:.4rem; flex-direction:column; align-items:stretch;
+    display:none;
+  }
+  #nav-toggle:checked ~ nav.primary .menu{ display:flex; }
+  /* แอนิเมชันปุ่ม */
+  #nav-toggle:checked + label.hamburger span{opacity:0}
+  #nav-toggle:checked + label.hamburger::before{transform: translateY(7px) rotate(45deg)}
+  #nav-toggle:checked + label.hamburger::after{transform: translateY(-7px) rotate(-45deg)}
+  .dropdown{position:static; box-shadow:none; border:0; padding:.2rem; display:block}
+}
+
+/* ---------- Main Content ---------- */
+main {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* บทความ */
+.content {
+  flex: 2;
+  padding-right: 20px;
+}
+.content h2 {
+  border-bottom: 2px solid var(--brand);
+  padding-bottom: 5px;
+}
+article {
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+
+/* ---------- รูป ---------- */
+.image-section {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.image-container {
+  display: flex;          /* เรียงภาพเป็นแถว */
+  gap: 20px;              /* เว้นระยะห่างระหว่างรูป */
+  justify-content: center;
+  flex-wrap: wrap;        /* ถ้าหน้าเล็ก รูปจะลงบรรทัดใหม่ */
+}
+
+.image-container img {
+  width: 200px;           /* ขนาดภาพ */
+  height: auto;
+  border-radius: 10px;    /* มุมโค้ง /
+  transition: transform 0.3s; /* ทำให้ขยับได้ */
+}
+
+/* เมื่อเอาเมาส์ชี้ */
+.image-container img:hover {
+  transform: scale(1.1) rotate(5deg); /* ขยาย และ หมุน */
+  cursor: pointer;
+}
+
+
+
+
+/* แถบด้านข้าง */
+.sidebar {
+  flex: 1;
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 5px;
+}
+.sidebar h2 {
+  font-size: 1.2em;
+  margin-top: 0;
+}
+.sidebar ul {
+  padding-left: 20px;
+}
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+/* ส่วนท้าย */
+footer {
+  padding: 15px 0;
+  margin-top: 30px;
+}
